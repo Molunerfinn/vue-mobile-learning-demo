@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<!-- saved from url=(0027)http://bbsreg.byr.cn/mobile -->
+<html lang="zh-cmn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <title>注册</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-title" content="北邮人论坛注册">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-touch-fullscreen" content="yes">
+  <link rel="stylesheet" href="css/swiper.min.css">
+  <link rel="stylesheet" href="css/fast_reg.css">
+  </head>
+<body>
+  <div class="swiper-container">
+    <div v-cloak id="swiper" class="swiper-wrapper">
+      <div class="swiper-slide swiper-no-swiping">
+        <div id="logo"><img class="logo" src="img/logo.png"></div>
+        <ul class="user-info">
+          <li v-for="item in main" style="position: relative;">
+            <input @keyup="check(item.name,$index)" class="effect" type="{{item.type}}" v-model="userInfo[item.name]">
+            <label :class="{ 'trans':item.effect}">
+              <span v-show="item.error == 'normal'">{{item.info}}</span>
+              <span style="color: red;" v-show="item.error == true">{{item.errorInfo}}</span>
+              <span v-show="item.error == false">{{item.info}}√</span>
+            </label>
+            <span class="focus-border cube"></span>
+          </li>
+        </ul>
+        <a href="#"><button @click="submitReg">注册</button></a>
+      </div>
+      <div class="swiper-slide">
+        <ul v-show="hasHome" class="section">
+          <div class="section-title">{{section[0].title}}</div>
+          <li class="board-list home" v-for="item in section[0].board">
+            <div @click="pick(item,$index,0)" v-bind:class="{'unpicked': !item.picked}"  class="board-name">
+              {{item.cnBoardName}}
+              <span v-bind:class="{'board-picked': item.picked}" class="picked"></span>
+            </div>
+          </li>
+        </ul>
+        <ul v-show="!hasHome" class="section">
+          <div class="section-title" style="margin-bottom: 40px;">来关注一些版面吧</div>
+        </ul>
+        <a href="#"><button @click="onNextStep">下一步</button></a>
+      </div>
+      <div class="swiper-slide">
+        <ul class="section">
+          <div class="section-title">@{{section[1].title}}</div>
+          <li class="board-list" v-for="item in section[1].board">
+            <div @click="pick(item,$index,1)"  v-bind:class="{'unpicked': !item.picked}" class="board-name">
+              {{item.cnBoardName}}
+              <span v-bind:class="{'board-picked': item.picked}" class="picked"></span>
+            </div>
+          </li>
+        </ul>
+        <a href="#"><button @click="onNextStep">下一步</button></a>
+      </div>
+      <div class="swiper-slide" id="max-height">
+        <ul class="section">
+          <div class="section-title">{{section[2].title}}</div>
+          <li class="board-list" v-for="item in section[2].board">
+            <div @click="pick(item,$index,2)" v-bind:class="{'unpicked': !item.picked}"  class="board-name">
+              {{item.cnBoardName}}
+              <span v-bind:class="{'board-picked': item.picked}" class="picked"></span>
+            </div>
+          </li>
+        </ul>
+        <a href="#"><button @click="onNextStep" style="margin-bottom: 20px">下一步</button></a>
+      </div>
+      <div class="swiper-slide">
+        <ul class="section">
+          <div class="section-title">{{section[3].title}}</div>
+          <li class="board-list" v-for="item in section[3].board">
+            <div @click="pick(item,$index,3)" v-bind:class="{'unpicked': !item.picked}"  class="board-name">
+              {{item.cnBoardName}}
+              <span v-bind:class="{'board-picked': item.picked}" class="picked"></span>
+            </div>
+          </li>
+        </ul>
+        <a href="#"><button @click="onSubmit">完成注册</button></a>
+      </div>
+    </div>
+    <!--<div class="swiper-pagination"></div>-->
+    <div v-show="loader" id="loader">
+      <div class="loader-inner line-scale">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <script src="js/swiper.min.js"></script>
+  <!-- Initialize Swiper -->
+  <script>
+  var swiper = new Swiper('.swiper-container', {
+    prevButton: '.swiper-button-prev',
+    pagination: '.swiper-pagination',
+    paginationType: 'progress',
+    noSwipingClass: 'swiper-no-swiping',
+    allowSwipeToNext: true,
+    allowSwipeToPrev: true,
+  });
+  </script>
+  <script src="js/vue-mobile.js"></script>
+  <script src="js/fast-reg.js"></script>
+
+
+</body><div></div></html>
